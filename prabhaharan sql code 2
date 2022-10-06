@@ -1,0 +1,201 @@
+mysql> select*from tour;
++------+------+-------+
+| name | age  | score |
++------+------+-------+
+| ram  |   28 | 30    |
++------+------+-------+
+1 row in set (0.00 sec)
+
+mysql> insert into player values('raj',26,120);
+Query OK, 1 row affected (0.11 sec)
+
+mysql> select*from player;
++--------+------+-------+
+| name   | age  | score |
++--------+------+-------+
+| pk     |   25 |    70 |
+| ch     |   27 |    50 |
+| db     |   30 |    80 |
+| prabhu |   45 |    99 |
+| raj    |   26 |   120 |
++--------+------+-------+
+5 rows in set (0.00 sec)
+
+mysql> insert into player values('ram',28,125),('charan',25,173),('ravan',20,152);
+Query OK, 3 rows affected (0.16 sec)
+Records: 3  Duplicates: 0  Warnings: 0
+
+mysql> select*from player;
++--------+------+-------+
+| name   | age  | score |
++--------+------+-------+
+| pk     |   25 |    70 |
+| ch     |   27 |    50 |
+| db     |   30 |    80 |
+| prabhu |   45 |    99 |
+| raj    |   26 |   120 |
+| ram    |   28 |   125 |
+| charan |   25 |   173 |
+| ravan  |   20 |   152 |
++--------+------+-------+
+8 rows in set (0.00 sec)
+
+mysql> insert into player values('shyam',30,9),('david',40,76);
+Query OK, 2 rows affected (0.13 sec)
+Records: 2  Duplicates: 0  Warnings: 0
+
+mysql> select*from player;
++--------+------+-------+
+| name   | age  | score |
++--------+------+-------+
+| pk     |   25 |    70 |
+| ch     |   27 |    50 |
+| db     |   30 |    80 |
+| prabhu |   45 |    99 |
+| raj    |   26 |   120 |
+| ram    |   28 |   125 |
+| charan |   25 |   173 |
+| ravan  |   20 |   152 |
+| shyam  |   30 |     9 |
+| david  |   40 |    76 |
++--------+------+-------+
+10 rows in set (0.00 sec)
+
+mysql> update player set age = 40 where name ='shyam';
+Query OK, 1 row affected (0.08 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select*from player;
++--------+------+-------+
+| name   | age  | score |
++--------+------+-------+
+| pk     |   25 |    70 |
+| ch     |   27 |    50 |
+| db     |   30 |    80 |
+| prabhu |   45 |    99 |
+| raj    |   26 |   120 |
+| ram    |   28 |   125 |
+| charan |   25 |   173 |
+| ravan  |   20 |   152 |
+| shyam  |   40 |     9 |
+| david  |   40 |    76 |
++--------+------+-------+
+10 rows in set (0.00 sec)
+
+mysql> delete from player where name='david';
+Query OK, 1 row affected (0.12 sec)
+
+mysql> select*from player;
++--------+------+-------+
+| name   | age  | score |
++--------+------+-------+
+| pk     |   25 |    70 |
+| ch     |   27 |    50 |
+| db     |   30 |    80 |
+| prabhu |   45 |    99 |
+| raj    |   26 |   120 |
+| ram    |   28 |   125 |
+| charan |   25 |   173 |
+| ravan  |   20 |   152 |
+| shyam  |   40 |     9 |
++--------+------+-------+
+9 rows in set (0.00 sec)
+
+
+
+
+
+
+mysql> create table strike(name varchar(19),score int, ball int);
+Query OK, 0 rows affected (0.74 sec)
+
+mysql> insert into strike values('rohit',264,210),('kl',127,119),('virat',183,151),('msd',183,141);
+Query OK, 4 rows affected (0.16 sec)
+Records: 4  Duplicates: 0  Warnings: 0
+
+mysql> select*from strike;
++-------+-------+------+
+| name  | score | ball |
++-------+-------+------+
+| rohit |   264 |  210 |
+| kl    |   127 |  119 |
+| virat |   183 |  151 |
+| msd   |   183 |  141 |
++-------+-------+------+
+4 rows in set (0.00 sec)
+
+mysql> select (score*ball)/100 as strike_rate from strike;
++-------------+
+| strike_rate |
++-------------+
+|    554.4000 |
+|    151.1300 |
+|    276.3300 |
+|    258.0300 |
++-------------+
+4 rows in set (0.00 sec)
+
+mysql> select (score/ball)*100 as strike_rate from strike;
++-------------+
+| strike_rate |
++-------------+
+|    125.7143 |
+|    106.7227 |
+|    121.1921 |
+|    129.7872 |
++-------------+
+4 rows in set (0.00 sec)
+
+mysql> select name,age from player;
++--------+------+
+| name   | age  |
++--------+------+
+| pk     |   25 |
+| ch     |   27 |
+| db     |   30 |
+| prabhu |   45 |
+| raj    |   26 |
+| ram    |   28 |
+| charan |   25 |
+| ravan  |   20 |
+| shyam  |   40 |
++--------+------+
+9 rows in set (0.00 sec)
+
+mysql> alter table strike change name full_name varchar(23);
+Query OK, 0 rows affected (0.26 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> select*from strike;
++-----------+-------+------+
+| full_name | score | ball |
++-----------+-------+------+
+| rohit     |   264 |  210 |
+| kl        |   127 |  119 |
+| virat     |   183 |  151 |
+| msd       |   183 |  141 |
++-----------+-------+------+
+4 rows in set (0.00 sec)
+
+mysql> select*from player;
++--------+------+-------+
+| name   | age  | score |
++--------+------+-------+
+| pk     |   25 |    70 |
+| ch     |   27 |    50 |
+| db     |   30 |    80 |
+| prabhu |   45 |    99 |
+| raj    |   26 |   120 |
+| ram    |   28 |   125 |
+| charan |   25 |   173 |
+| ravan  |   20 |   152 |
+| shyam  |   40 |     9 |
++--------+------+-------+
+9 rows in set (0.01 sec)
+
+mysql> drop table player;
+Query OK, 0 rows affected (0.58 sec)
+
+mysql> select*from player;
+ERROR 1146 (42S02): Table 'pk1.player' doesn't exist
+mysql> 

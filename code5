@@ -1,0 +1,349 @@
+mysql> create table studentprofile(rollno int,name varchar(200),dob date,department varchar(200),city varchar(200));
+Query OK, 0 rows affected (0.37 sec)
+
+mysql> desc studentprofile;
++------------+--------------+------+-----+---------+-------+
+| Field      | Type         | Null | Key | Default | Extra |
++------------+--------------+------+-----+---------+-------+
+| rollno     | int          | YES  |     | NULL    |       |
+| name       | varchar(200) | YES  |     | NULL    |       |
+| dob        | date         | YES  |     | NULL    |       |
+| department | varchar(200) | YES  |     | NULL    |       |
+| city       | varchar(200) | YES  |     | NULL    |       |
++------------+--------------+------+-----+---------+-------+
+5 rows in set (0.08 sec)
+
+mysql> create marks(rollno int,name varchar(200),mark1 int,mark2 int);
+
+mysql> create table marks(rollno int,name varchar(200),mark1 int,mark2 int);
+Query OK, 0 rows affected (0.22 sec)
+
+mysql> desc marks;
++--------+--------------+------+-----+---------+-------+
+| Field  | Type         | Null | Key | Default | Extra |
++--------+--------------+------+-----+---------+-------+
+| rollno | int          | YES  |     | NULL    |       |
+| name   | varchar(200) | YES  |     | NULL    |       |
+| mark1  | int          | YES  |     | NULL    |       |
+| mark2  | int          | YES  |     | NULL    |       |
++--------+--------------+------+-----+---------+-------+
+4 rows in set (0.01 sec)
+
+mysql> drop table marks;
+Query OK, 0 rows affected (0.11 sec)
+
+mysql> drop table studentprofile;
+Query OK, 0 rows affected (0.06 sec)
+
+mysql> create table emp_det(Emp_id int,Emp_Name varchar(200),Phone_num bigint,Hire_date date,Dept varchar(200),Salary double(10,2),commission double(10,2));
+Query OK, 0 rows affected, 2 warnings (0.17 sec)
+
+mysql> desc emp_det;
++------------+--------------+------+-----+---------+-------+
+| Field      | Type         | Null | Key | Default | Extra |
++------------+--------------+------+-----+---------+-------+
+| Emp_id     | int          | YES  |     | NULL    |       |
+| Emp_Name   | varchar(200) | YES  |     | NULL    |       |
+| Phone_num  | bigint       | YES  |     | NULL    |       |
+| Hire_date  | date         | YES  |     | NULL    |       |
+| Dept       | varchar(200) | YES  |     | NULL    |       |
+| Salary     | double(10,2) | YES  |     | NULL    |       |
+| commission | double(10,2) | YES  |     | NULL    |       |
++------------+--------------+------+-----+---------+-------+
+7 rows in set (0.00 sec)
+
+mysql> drop table emp_det;
+Query OK, 0 rows affected (0.19 sec)
+mysql> create table emp(Emp_id int,Emp_Name varchar(200),Phone_num bigint,Hire_date date,Dept varchar(200),Salary double(10,2),commission double(10,2));
+Query OK, 0 rows affected, 2 warnings (0.18 sec)
+
+mysql> desc emp;
++------------+--------------+------+-----+---------+-------+
+| Field      | Type         | Null | Key | Default | Extra |
++------------+--------------+------+-----+---------+-------+
+| Emp_id     | int          | YES  |     | NULL    |       |
+| Emp_Name   | varchar(200) | YES  |     | NULL    |       |
+| Phone_num  | bigint       | YES  |     | NULL    |       |
+| Hire_date  | date         | YES  |     | NULL    |       |
+| Dept       | varchar(200) | YES  |     | NULL    |       |
+| Salary     | double(10,2) | YES  |     | NULL    |       |
+| commission | double(10,2) | YES  |     | NULL    |       |
++------------+--------------+------+-----+---------+-------+
+7 rows in set (0.01 sec)
+
+mysql> insert into emp( Emp_id, Emp_Name, Phone_num, Hire_date, Dept, Salary, commission)values(1001,'bala',8012657624,'2020-06-06',Manager,9000.90,500);
+ERROR 1054 (42S22): Unknown column 'Manager' in 'field list'
+mysql> insert into emp( Emp_id, Emp_Name, Phone_num, Hire_date, Dept, Salary, commission)values(1001,'bala',8012657624,'2020-06-06','Manager',9000.90,500);
+Query OK, 1 row affected (0.03 sec)
+
+mysql> select * from empp;
++--------+----------+------------+------------+---------+---------+------------+
+| Emp_id | Emp_Name | Phone_num  | Hire_date  | Dept    | Salary  | commission |
++--------+----------+------------+------------+---------+---------+------------+
+|   1001 | bala     | 9488805434| 2020-06-06 | manager| 9000.90 |     500.00 |
++--------+----------+------------+------------+---------+---------+------------+
+1 row in set (0.00 sec)
+
+mysql> insert into emp( Emp_id, Emp_Name, Phone_num, Hire_date, Dept, Salary, commission)values(1001,'bala',8012657624,'2020-06-06','Manager',9000.90,500),(1002,'seenu',9488805438,'2020-09-26','Clerk',8500.90,400),(1003,'raj',7502757576,'2020-10-19','Clerk',8500.90,400),(1004,'hari',9842577554,'2020-011-16','Clerk',8500.90,400),(1001,'bala',8012657624,'2020-11-09','acco',8000.90,300);
+Query OK, 5 rows affected (0.03 sec)
+Records: 5  Duplicates: 0  Warnings: 0
+
+mysql> select * from empp;
++--------+----------+------------+------------+------------+---------+------------+
+| Emp_id | Emp_Name | Phone_num  | Hire_date  | Dept       | Salary  | commission |
++--------+----------+------------+------------+------------+---------+------------+
+|   1001 | bala     | 9488805434| 2020-06-06 | manager   | 9000.90 |     500.00 |
+|   1001 | bala     | 9488805434| 2020-06-06 | manager   | 9000.90 |     500.00 |
+|   1002 | seenu    | 9488805438 | 2020-09-26 | clerk      | 8500.90 |     400.00 |
+|   1003 | raj     | 7010680779| 2020-10-19 | clerk      | 8500.90 |     400.00 |
+|   1004 | hari     | 9842577554 | 2020-11-16 | clerk      | 8500.90 |     400.00 |
+|   1001 | bala     | 9488805434| 2020-11-09 | acco | 8000.90 |     300.00 |
++--------+----------+------------+------------+------------+---------+------------+
+6 rows in set (0.00 sec)
+
+mysql> truncate table emp;
+Query OK, 0 rows affected (0.52 sec)
+
+mysql> desc emp;
++------------+--------------+------+-----+---------+-------+
+| Field      | Type         | Null | Key | Default | Extra |
++------------+--------------+------+-----+---------+-------+
+| Emp_id     | int          | YES  |     | NULL    |       |
+| Emp_Name   | varchar(200) | YES  |     | NULL    |       |
+| Phone_num  | bigint       | YES  |     | NULL    |       |
+| Hire_date  | date         | YES  |     | NULL    |       |
+| Dept       | varchar(200) | YES  |     | NULL    |       |
+| Salary     | double(10,2) | YES  |     | NULL    |       |
+| commission | double(10,2) | YES  |     | NULL    |       |
++------------+--------------+------+-----+---------+-------+
+7 rows in set (0.01 sec)
+
+mysql> insert into emp( Emp_id, Emp_Name, Phone_num, Hire_date, Dept, Salary, commission)values(1001,'bala',8012657624,'2020-06-06','Manager',9000.90,500),(1002,'seenu',9488805438,'2020-09-26','Clerk',8500.90,400),(1003,'raj',7502757576,'2020-10-19','Clerk',8500.90,400),(1004,'hari',9842577554,'2020-011-16','Clerk',8500.90,400),(1001,'bala',8012657624,'2020-11-09','acco',8000.90,300);
+Query OK, 5 rows affected (0.12 sec)
+Records: 5  Duplicates: 0  Warnings: 0
+
+mysql> select * from empp;
++--------+----------+------------+------------+------------+---------+------------+
+| Emp_id | Emp_Name | Phone_num  | Hire_date  | Dept       | Salary  | commission |
++--------+----------+------------+------------+------------+---------+------------+
+|   1001 | bala     | 9488805434| 2020-06-06 | manager   | 9000.90 |     500.00 |
+|   1002 | seenu    | 9488805438 | 2020-09-26 | clerk      | 8500.90 |     400.00 |
+|   1003 | raj     | 7010680779| 2020-10-19 | clerk      | 8500.90 |     400.00 |
+|   1004 | hari     | 9842577554 | 2020-11-16 | clerk      | 8500.90 |     400.00 |
+|   1001 | bala     | 9488805434| 2020-11-09 | acco | 8000.90 |     300.00 |
++--------+----------+------------+------------+------------+---------+------------+
+5 rows in set (0.00 sec)
+
+mysql> truncate table emp;
+Query OK, 0 rows affected (0.17 sec)
+
+mysql> insert into emp( Emp_id, Emp_Name, Phone_num, Hire_date, Dept, Salary, commission)values(1001,'bala',8012657624,'2020-06-06','Manager',9000.90,500),(1002,'seenu',9488805438,'2020-09-26','Clerk',8500.90,400),(1003,'raj',7502757576,'2020-10-19','Clerk',8500.90,400),(1004,'hari',9842577554,'2020-011-16','Clerk',8500.90,400),(1005,'Hari',7373982825,'2020-11-09','acco',8000.90,300);
+Query OK, 5 rows affected (0.03 sec)
+Records: 5  Duplicates: 0  Warnings: 0
+
+mysql> select * from empp;
++--------+----------+------------+------------+------------+---------+------------+
+| Emp_id | Emp_Name | Phone_num  | Hire_date  | Dept       | Salary  | commission |
++--------+----------+------------+------------+------------+---------+------------+
+|   1001 | bala     | 9488805434| 2020-06-06 | manager   | 9000.90 |     500.00 |
+|   1002 | seenu    | 9488805438 | 2020-09-26 | clerk      | 8500.90 |     400.00 |
+|   1003 | raj     | 7010680779| 2020-10-19 | clerk      | 8500.90 |     400.00 |
+|   1004 | hari     | 9842577554 | 2020-11-16 | clerk      | 8500.90 |     400.00 |
+|   1005 | Hari     | 7373982825 | 2020-11-09 | acco | 8000.90 |     300.00 |
++--------+----------+------------+------------+------------+---------+------------+
+5 rows in set (0.00 sec)
+
+mysql> insert into emp( Emp_id, Emp_Name, Phone_num, Hire_date, Dept, Salary, commission)values(1006,'chandru',8489747578,'2020-11-29','acco',8000.90,300),(1007,'siva',8489747445,'2020-01-31','No.20',7500.90,300),(1008,'tamil',9080457845,'2020-12-11','No.20',7500.90,300),(1009,'Prabha',7804778799,'2020-12-16','No.20',7500.90,300),(1010,'sathi',9944886622,'2021-01-09','emp',6000.90,200);
+Query OK, 5 rows affected (0.18 sec)
+Records: 5  Duplicates: 0  Warnings: 0
+
+mysql> select * from empp;
++--------+----------+------------+------------+------------+---------+------------+
+| Emp_id | Emp_Name | Phone_num  | Hire_date  | Dept       | Salary  | commission |
++--------+----------+------------+------------+------------+---------+------------+
+|   1001 | bala     | 9488805434| 2020-06-06 | manager   | 9000.90 |     500.00 |
+|   1002 | seenu    | 9488805438 | 2020-09-26 | clerk      | 8500.90 |     400.00 |
+|   1003 | raj     | 7010680779| 2020-10-19 | clerk      | 8500.90 |     400.00 |
+|   1004 | hari     | 9842577554 | 2020-11-16 | clerk      | 8500.90 |     400.00 |
+|   1005 | Hari     | 7373982825 | 2020-11-09 | acco | 8000.90 |     300.00 |
+|   1006 | chandru | 8489747578 | 2020-11-29 | acco | 8000.90 |     300.00 |
+|   1007 | siva      | 8489747445 | 2020-01-31 | No.20      | 7500.90 |     300.00 |
+|   1008 | Karthik  | 9080457845 | 2020-12-11 | No.20      | 7500.90 |     300.00 |
+|   1009 | Prabha   | 7804778799 | 2020-12-16 | No.20      | 7500.90 |     300.00 |
+|   1010 | sathi     | 9944886622 | 2021-01-09 | emp   | 6000.90 |     200.00 |
++--------+----------+------------+------------+------------+---------+------------+
+10 rows in set (0.00 sec)
+
+mysql> insert into emp( Emp_id, Emp_Name, Phone_num, Hire_date, Dept, Salary, commission)values(1011,'giri',6368403839,'2021-03-06','No.20(Data_analyst)',7000.90,250),(1012,'Somesh',6367686124,'2021-04-16','No.20(Data_analyst)',7000.90,250),(1013,'Harrish',7213654789,'2021-4-29','emp',6000.40,200),(1014,'Vishwa',9629287365,'2021-05-01','emp',6000.40,200),(1015,'Udhaya',9672414123,'2021-05-09','emp',6000.40,200),(1016,'Giri',9689904512,'2021-05-29','emp',6000.40,200);
+Query OK, 6 rows affected (0.10 sec)
+Records: 6  Duplicates: 0  Warnings: 0
+
+mysql> select * from empp;
++--------+----------+------------+------------+---------------------+---------+------------+
+| Emp_id | Emp_Name | Phone_num  | Hire_date  | Dept                | Salary  | commission |
++--------+----------+------------+------------+---------------------+---------+------------+
+|   1001 | bala     | 9488805434| 2020-06-06 | manager            | 9000.90 |     500.00 |
+|   1002 | seenu    | 9488805438 | 2020-09-26 | clerk               | 8500.90 |     400.00 |
+|   1003 | raj     | 7010680779| 2020-10-19 | clerk               | 8500.90 |     400.00 |
+|   1004 | hari     | 9842577554 | 2020-11-16 | clerk               | 8500.90 |     400.00 |
+|   1005 | Hari     | 7373982825 | 2020-11-09 | acco          | 8000.90 |     300.00 |
+|   1006 | chandru | 8489747578 | 2020-11-29 | acco          | 8000.90 |     300.00 |
+|   1007 | siva      | 8489747445 | 2020-01-31 | No.20               | 7500.90 |     300.00 |
+|   1008 | Karthik  | 9080457845 | 2020-12-11 | No.20               | 7500.90 |     300.00 |
+|   1009 | Prabha   | 7804778799 | 2020-12-16 | No.20               | 7500.90 |     300.00 |
+|   1010 | sathi     | 9944886622 | 2021-01-09 | emp            | 6000.90 |     200.00 |
+|   1011 | giri   | 6368403839 | 2021-03-06 | No.20(Data_analyst) | 7000.90 |     250.00 |
+|   1012 | venket  | 6367686124 | 2021-04-16 | No.20(Data_analyst) | 7000.90 |     250.00 |
+|   1013 | gokul | 7213654789 | 2021-04-29 | emp            | 6000.40 |     200.00 |
+|   1014 |prajith   | 9629287365 | 2021-05-01 | emp            | 6000.40 |     200.00 |
+|   1015 | suresh  | 9672414123 | 2021-05-09 | emp            | 6000.40 |     200.00 |
+|   1016 | Giri     | 9689904512 | 2021-05-29 | emp            | 6000.40 |     200.00 |
++--------+----------+------------+------------+---------------------+---------+------------+
+16 rows in set (0.00 sec)
+
+mysql> select sum(Emp_Name) from empp;
++---------------+
+| sum(Emp_Name) |
++---------------+
+|             0 |
++---------------+
+1 row in set, 10 warnings (0.02 sec)
+
+mysql> select sum(Emp_id) from empp;
++-------------+
+| sum(Emp_id) |
++-------------+
+|       16136 |
++-------------+
+1 row in set (0.00 sec)
+
+mysql> select count(Emp_id) from empp;
++---------------+
+| count(Emp_id) |
++---------------+
+|            16 |
++---------------+
+1 row in set (0.00 sec)
+
+mysql> select sum(Salary),sum(Commission) from empp;
++-------------+-----------------+
+| sum(Salary) | sum(Commission) |
++-------------+-----------------+
+|   117012.40 |         4700.00 |
++-------------+-----------------+
+1 row in set (0.00 sec)
+
+mysql> select max(Salary) from empp;
++-------------+
+| max(Salary) |
++-------------+
+|     9000.90 |
++-------------+
+1 row in set (0.07 sec)
+
+mysql> select min(hiredate),Emp_name from empp;
+ERROR 1054 (42S22): Unknown column 'hiredate' in 'field list'
+mysql> select min(hire_date),Emp_name from empp;
++----------------+----------+
+| min(hire_date) | Emp_name |
++----------------+----------+
+| 2020-01-31     | bala     |
++----------------+----------+
+1 row in set (0.05 sec)
+
+mysql> select max(hire_date),Emp_name from empp;
++----------------+----------+
+| max(hire_date) | Emp_name |
++----------------+----------+
+| 2021-05-29     | bala     |
++----------------+----------+
+1 row in set (0.00 sec)
+
+mysql> select max(hire_date),max(Emp_name) from empp;
++----------------+---------------+
+| max(hire_date) | max(Emp_name) |
++----------------+---------------+
+| 2021-05-29     |prajith        |
++----------------+---------------+
+1 row in set (0.00 sec)
+mysql> select * from empp where max(hire_date);
+ERROR 1111 (HY000): Invalid use of group function
+mysql> select max(hire_date) from empp group by Emp_id;
++----------------+
+| max(hire_date) |
++----------------+
+| 2020-06-06     |
+| 2020-09-26     |
+| 2020-10-19     |
+| 2020-11-16     |
+| 2020-11-09     |
+| 2020-11-29     |
+| 2020-01-31     |
+| 2020-12-11     |
+| 2020-12-16     |
+| 2021-01-09     |
+| 2021-03-06     |
+| 2021-04-16     |
+| 2021-04-29     |
+| 2021-05-01     |
+| 2021-05-09     |
+| 2021-05-29     |
++----------------+
+16 rows in set (0.00 sec)
+
+mysql> select * from empp max(hire_date);
+mysql> select max(hire_date),Emp_name from empp;
++----------------+----------+
+| max(hire_date) | Emp_name |
++----------------+----------+
+| 2021-05-29     | bala     |
++----------------+----------+
+1 row in set (0.00 sec)
+
+mysql> select * from empp;
++--------+----------+------------+------------+---------------------+---------+------------+
+| Emp_id | Emp_Name | Phone_num  | Hire_date  | Dept                | Salary  | commission |
++--------+----------+------------+------------+---------------------+---------+------------+
+|   1001 | bala     | 9488805434| 2020-06-06 | manager            | 9000.90 |     500.00 |
+|   1002 | seenu    | 9488805438 | 2020-09-26 | clerk               | 8500.90 |     400.00 |
+|   1003 | raj     | 7010680779| 2020-10-19 | clerk               | 8500.90 |     400.00 |
+|   1004 | hari     | 9842577554 | 2020-11-16 | clerk               | 8500.90 |     400.00 |
+|   1005 | Hari     | 7373982825 | 2020-11-09 | acco          | 8000.90 |     300.00 |
+|   1006 | chandru | 8489747578 | 2020-11-29 | acco          | 8000.90 |     300.00 |
+|   1007 | siva      | 8489747445 | 2020-01-31 | No.20               | 7500.90 |     300.00 |
+|   1008 | Karthik  | 9080457845 | 2020-12-11 | No.20               | 7500.90 |     300.00 |
+|   1009 | Prabha   | 7804778799 | 2020-12-16 | No.20               | 7500.90 |     300.00 |
+|   1010 | sathi     | 9944886622 | 2021-01-09 | emp            | 6000.90 |     200.00 |
+|   1011 | giri   | 6368403839 | 2021-03-06 | No.20(Data_analyst) | 7000.90 |     250.00 |
+|   1012 | venket  | 6367686124 | 2021-04-16 | No.20(Data_analyst) | 7000.90 |     250.00 |
+|   1013 | gokul | 7213654789 | 2021-04-29 | emp            | 6000.40 |     200.00 |
+|   1014 |prajith   | 9629287365 | 2021-05-01 | emp            | 6000.40 |     200.00 |
+|   1015 | suresh  | 9672414123 | 2021-05-09 | emp            | 6000.40 |     200.00 |
+|   1016 | Giri     | 9689904512 | 2021-05-29 | emp            | 6000.40 |     200.00 |
++--------+----------+------------+------------+---------------------+---------+------------+
+16 rows in set (0.00 sec)
+
+
+
+
+
+
+
+
+class PalindromeExample{  
+ public static void main(String args[]){  
+  int a,b=0,temp;    
+  int n=454; 
+  
+  temp=n;    
+  while(n>0){    
+   a=n%10;  
+   b=(b*10)+r;    
+   n=n/10;    
+  }    
+  if(temp==b)    
+   System.out.println("palindrome number ");    
+  else    
+   System.out.println("not palindrome");    
+}  
+}  

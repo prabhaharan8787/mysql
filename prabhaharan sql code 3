@@ -1,0 +1,148 @@
+
+mysql> select*from products;
++---------------+----------+-------+-----------+--------+
+| name          | category | price | brand     | rating |
++---------------+----------+-------+-----------+--------+
+| black shirts  | clothing |   900 | puma      |    4.2 |
+| white shirts  | clothing |  1050 | alan      |    4.9 |
+| black tshirts | clothing |   899 | puma      |    3.9 |
+| black jeans   | clothing |  1500 | alan      |    4.3 |
+| white jeans   | clothing |  1233 | alan      |      3 |
+| bourbon small | choco    |    30 | birtannia |    3.6 |
+| bourbon extra | choco    |    50 | birtannia |    3.8 |
+| lays chips    | chips    |    10 | pepsico   |    4.3 |
+| lays chips    | chips    |    10 | pepsico   |    4.3 |
+| bingo chips   | chips    |     5 | potato    |    4.5 |
++---------------+----------+-------+-----------+--------+
+10 rows in set (0.00 sec)
+
+mysql> select*from products where name like 'jeans%';
+Empty set (0.00 sec)
+
+mysql> select*from products where name like 'jeans';
+Empty set (0.00 sec)
+
+mysql> select*from products where name like '%jeans';
++-------------+----------+-------+-------+--------+
+| name        | category | price | brand | rating |
++-------------+----------+-------+-------+--------+
+| black jeans | clothing |  1500 | alan  |    4.3 |
+| white jeans | clothing |  1233 | alan  |      3 |
++-------------+----------+-------+-------+--------+
+2 rows in set (0.00 sec)
+
+mysql> select*from products where name like 'bourbon%';
++---------------+----------+-------+-----------+--------+
+| name          | category | price | brand     | rating |
++---------------+----------+-------+-----------+--------+
+| bourbon small | choco    |    30 | birtannia |    3.6 |
+| bourbon extra | choco    |    50 | birtannia |    3.8 |
++---------------+----------+-------+-----------+--------+
+2 rows in set (0.00 sec)
+
+mysql> select*from products where name like '%chips';
++-------------+----------+-------+---------+--------+
+| name        | category | price | brand   | rating |
++-------------+----------+-------+---------+--------+
+| lays chips  | chips    |    10 | pepsico |    4.3 |
+| lays chips  | chips    |    10 | pepsico |    4.3 |
+| bingo chips | chips    |     5 | potato  |    4.5 |
++-------------+----------+-------+---------+--------+
+3 rows in set (0.00 sec)
+
+mysql> select*from products where name like '____';
+Empty set (0.01 sec)
+
+mysql> select*from products where name like '____%';
++---------------+----------+-------+-----------+--------+
+| name          | category | price | brand     | rating |
++---------------+----------+-------+-----------+--------+
+| black shirts  | clothing |   900 | puma      |    4.2 |
+| white shirts  | clothing |  1050 | alan      |    4.9 |
+| black tshirts | clothing |   899 | puma      |    3.9 |
+| black jeans   | clothing |  1500 | alan      |    4.3 |
+| white jeans   | clothing |  1233 | alan      |      3 |
+| bourbon small | choco    |    30 | birtannia |    3.6 |
+| bourbon extra | choco    |    50 | birtannia |    3.8 |
+| lays chips    | chips    |    10 | pepsico   |    4.3 |
+| lays chips    | chips    |    10 | pepsico   |    4.3 |
+| bingo chips   | chips    |     5 | potato    |    4.5 |
++---------------+----------+-------+-----------+--------+
+10 rows in set (0.00 sec)
+
+mysql> select*from products where name like 'pu__';
+Empty set (0.00 sec)
+
+mysql> select*from products where brand like 'pu__';
++---------------+----------+-------+-------+--------+
+| name          | category | price | brand | rating |
++---------------+----------+-------+-------+--------+
+| black shirts  | clothing |   900 | puma  |    4.2 |
+| black tshirts | clothing |   899 | puma  |    3.9 |
++---------------+----------+-------+-------+--------+
+2 rows in set (0.00 sec)
+
+mysql> select*from products where name like 'w%';
++--------------+----------+-------+-------+--------+
+| name         | category | price | brand | rating |
++--------------+----------+-------+-------+--------+
+| white shirts | clothing |  1050 | alan  |    4.9 |
+| white jeans  | clothing |  1233 | alan  |      3 |
++--------------+----------+-------+-------+--------+
+2 rows in set (0.00 sec)
+
+mysql> select*from products where name like '%a';
++---------------+----------+-------+-----------+--------+
+| name          | category | price | brand     | rating |
++---------------+----------+-------+-----------+--------+
+| bourbon extra | choco    |    50 | birtannia |    3.8 |
++---------------+----------+-------+-----------+--------+
+1 row in set (0.00 sec)
+
+mysql> select*from products where price<=1000;
++---------------+----------+-------+-----------+--------+
+| name          | category | price | brand     | rating |
++---------------+----------+-------+-----------+--------+
+| black shirts  | clothing |   900 | puma      |    4.2 |
+| black tshirts | clothing |   899 | puma      |    3.9 |
+| bourbon small | choco    |    30 | birtannia |    3.6 |
+| bourbon extra | choco    |    50 | birtannia |    3.8 |
+| lays chips    | chips    |    10 | pepsico   |    4.3 |
+| lays chips    | chips    |    10 | pepsico   |    4.3 |
+| bingo chips   | chips    |     5 | potato    |    4.5 |
++---------------+----------+-------+-----------+--------+
+7 rows in set (0.00 sec)
+
+mysql> select*from products where rating>4.0;
++--------------+----------+-------+---------+--------+
+| name         | category | price | brand   | rating |
++--------------+----------+-------+---------+--------+
+| black shirts | clothing |   900 | puma    |    4.2 |
+| white shirts | clothing |  1050 | alan    |    4.9 |
+| black jeans  | clothing |  1500 | alan    |    4.3 |
+| lays chips   | chips    |    10 | pepsico |    4.3 |
+| lays chips   | chips    |    10 | pepsico |    4.3 |
+| bingo chips  | chips    |     5 | potato  |    4.5 |
++--------------+----------+-------+---------+--------+
+6 rows in set (0.00 sec)
+
+mysql> select*from products;
++---------------+----------+-------+-----------+--------+
+| name          | category | price | brand     | rating |
++---------------+----------+-------+-----------+--------+
+| black shirts  | clothing |   900 | puma      |    4.2 |
+| white shirts  | clothing |  1050 | alan      |    4.9 |
+| black tshirts | clothing |   899 | puma      |    3.9 |
+| black jeans   | clothing |  1500 | alan      |    4.3 |
+| white jeans   | clothing |  1233 | alan      |      3 |
+| bourbon small | choco    |    30 | birtannia |    3.6 |
+| bourbon extra | choco    |    50 | birtannia |    3.8 |
+| lays chips    | chips    |    10 | pepsico   |    4.3 |
+| lays chips    | chips    |    10 | pepsico   |    4.3 |
+| bingo chips   | chips    |     5 | potato    |    4.5 |
++---------------+----------+-------+-----------+--------+
+10 rows in set (0.00 sec)
+
+mysql> 
+
+

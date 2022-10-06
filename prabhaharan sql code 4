@@ -1,0 +1,201 @@
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| code               |
+| information_schema |
+| mysql              |
+| performance_schema |
+| pk1                |
+| pk_database        |
+| sys                |
++--------------------+
+7 rows in set (0.00 sec)
+
+mysql> use code;
+Reading table information for completion of table and column names
+You can turn off this feature to get a quicker startup with -A
+
+Database changed
+mysql> select*from products;
++---------------+----------+-------+-----------+--------+
+| name          | category | price | brand     | rating |
++---------------+----------+-------+-----------+--------+
+| black shirts  | clothing |   900 | puma      |    4.2 |
+| white shirts  | clothing |  1050 | alan      |    4.9 |
+| black tshirts | clothing |   899 | puma      |    3.9 |
+| black jeans   | clothing |  1500 | alan      |    4.3 |
+| white jeans   | clothing |  1233 | alan      |      3 |
+| bourbon small | choco    |    30 | birtannia |    3.6 |
+| bourbon extra | choco    |    50 | birtannia |    3.8 |
+| lays chips    | chips    |    10 | pepsico   |    4.3 |
+| lays chips    | chips    |    10 | pepsico   |    4.3 |
+| bingo chips   | chips    |     5 | potato    |    4.5 |
+| blue shirt    | clothing |  1200 | denim     |    4.5 |
+| note 4        | mob      | 10000 | redmi     |    4.3 |
+| nord se       | mob      | 35000 | one plus  |    4.4 |
+| silk          | choco    |    50 | cadbury   |    4.5 |
+| cake          | cakes    |   300 | cake      |    3.3 |
+| red shirt     | clothing |  2300 | nike      |    3.3 |
+| green shirts  | clothing |  1999 | levis     |    4.4 |
++---------------+----------+-------+-----------+--------+
+17 rows in set (0.00 sec)
+
+mysql> select * from products where brand in('puma','denim') or('levis');
++---------------+----------+-------+-------+--------+
+| name          | category | price | brand | rating |
++---------------+----------+-------+-------+--------+
+| black shirts  | clothing |   900 | puma  |    4.2 |
+| black tshirts | clothing |   899 | puma  |    3.9 |
+| blue shirt    | clothing |  1200 | denim |    4.5 |
++---------------+----------+-------+-------+--------+
+3 rows in set, 1 warning (0.00 sec)
+
+mysql> select * from products where category in('clothing') price<1200;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'price<1200' at line 1
+mysql> select * from products where category in 'clothing' price<1200;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ''clothing' price<1200' at line 1
+mysql> select * from products where category in ('clothing') and price<1200;
++---------------+----------+-------+-------+--------+
+| name          | category | price | brand | rating |
++---------------+----------+-------+-------+--------+
+| black shirts  | clothing |   900 | puma  |    4.2 |
+| white shirts  | clothing |  1050 | alan  |    4.9 |
+| black tshirts | clothing |   899 | puma  |    3.9 |
++---------------+----------+-------+-------+--------+
+3 rows in set (0.00 sec)
+
+mysql> select*from products where rating>4.0 and price<=1000;
++--------------+----------+-------+---------+--------+
+| name         | category | price | brand   | rating |
++--------------+----------+-------+---------+--------+
+| black shirts | clothing |   900 | puma    |    4.2 |
+| lays chips   | chips    |    10 | pepsico |    4.3 |
+| lays chips   | chips    |    10 | pepsico |    4.3 |
+| bingo chips  | chips    |     5 | potato  |    4.5 |
+| silk         | choco    |    50 | cadbury |    4.5 |
++--------------+----------+-------+---------+--------+
+5 rows in set (0.00 sec)
+
+mysql> select * from products where rating>3.6 and price<1000 and brand('puma');
+ERROR 1305 (42000): FUNCTION code.brand does not exist
+mysql> select * from products where rating>3.6 and price<1000 and brand='puma';
++---------------+----------+-------+-------+--------+
+| name          | category | price | brand | rating |
++---------------+----------+-------+-------+--------+
+| black shirts  | clothing |   900 | puma  |    4.2 |
+| black tshirts | clothing |   899 | puma  |    3.9 |
++---------------+----------+-------+-------+--------+
+2 rows in set (0.00 sec)
+
+mysql> select *from products where brand ='redmi' and rating>4.0 or brand='one pluse';
++--------+----------+-------+-------+--------+
+| name   | category | price | brand | rating |
++--------+----------+-------+-------+--------+
+| note 4 | mob      | 10000 | redmi |    4.3 |
++--------+----------+-------+-------+--------+
+1 row in set (0.00 sec)
+
+mysql> select*from products name='cake';
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '='cake'' at line 1
+mysql> select*from products where name='cake';
++------+----------+-------+-------+--------+
+| name | category | price | brand | rating |
++------+----------+-------+-------+--------+
+| cake | cakes    |   300 | cake  |    3.3 |
++------+----------+-------+-------+--------+
+1 row in set (0.01 sec)
+
+mysql> select*from products where brand ='puma' and rating>3.5 or brand='denim' and rating>4.0;
++---------------+----------+-------+-------+--------+
+| name          | category | price | brand | rating |
++---------------+----------+-------+-------+--------+
+| black shirts  | clothing |   900 | puma  |    4.2 |
+| black tshirts | clothing |   899 | puma  |    3.9 |
+| blue shirt    | clothing |  1200 | denim |    4.5 |
++---------------+----------+-------+-------+--------+
+3 rows in set (0.00 sec)
+
+mysql> select*from products where brand='puma',brand='nike',brand='levis' <> name='black shirt';
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ',brand='nike',brand='levis' <> name='black shirt'' at line 1
+mysql> select*from products where brand='puma',brand='nike',brand='levis' and  <> name='black shirt';
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ',brand='nike',brand='levis' and  <> name='black shirt'' at line 1
+mysql> select*from products where brand='puma',brand='nike',brand='levis' in  <> name='black shirt';
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ',brand='nike',brand='levis' in  <> name='black shirt'' at line 1
+mysql> select*from products where brand='puma',brand='nike',brand='levis' in  (<> name='black shirt');
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ',brand='nike',brand='levis' in  (<> name='black shirt')' at line 1
+mysql> select*from products where brand='puma',brand='nike',brand='levis' and  name<>'black shirt';
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ',brand='nike',brand='levis' and  name<>'black shirt'' at line 1
+mysql> select*from products where brand='puma',brand='nike',brand='levis' and <> name='black shirt';
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ',brand='nike',brand='levis' and <> name='black shirt'' at line 1
+mysql> select*from products where brand='puma',brand='nike',brand='levis' where <> name='black shirt';
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ',brand='nike',brand='levis' where <> name='black shirt'' at line 1
+mysql> select*from products where brand='puma',brand='nike',brand='levis';
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ',brand='nike',brand='levis'' at line 1
+mysql> select*from products where name<>'black shirt';
++---------------+----------+-------+-----------+--------+
+| name          | category | price | brand     | rating |
++---------------+----------+-------+-----------+--------+
+| black shirts  | clothing |   900 | puma      |    4.2 |
+| white shirts  | clothing |  1050 | alan      |    4.9 |
+| black tshirts | clothing |   899 | puma      |    3.9 |
+| black jeans   | clothing |  1500 | alan      |    4.3 |
+| white jeans   | clothing |  1233 | alan      |      3 |
+| bourbon small | choco    |    30 | birtannia |    3.6 |
+| bourbon extra | choco    |    50 | birtannia |    3.8 |
+| lays chips    | chips    |    10 | pepsico   |    4.3 |
+| lays chips    | chips    |    10 | pepsico   |    4.3 |
+| bingo chips   | chips    |     5 | potato    |    4.5 |
+| blue shirt    | clothing |  1200 | denim     |    4.5 |
+| note 4        | mob      | 10000 | redmi     |    4.3 |
+| nord se       | mob      | 35000 | one plus  |    4.4 |
+| silk          | choco    |    50 | cadbury   |    4.5 |
+| cake          | cakes    |   300 | cake      |    3.3 |
+| red shirt     | clothing |  2300 | nike      |    3.3 |
+| green shirts  | clothing |  1999 | levis     |    4.4 |
++---------------+----------+-------+-----------+--------+
+17 rows in set (0.00 sec)
+
+mysql> select*from products where brand='puma',brand='nike',brand='levis' where <> name='black shirts';
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ',brand='nike',brand='levis' where <> name='black shirts'' at line 1
+mysql> select*from products where name<>'black shirts';
++---------------+----------+-------+-----------+--------+
+| name          | category | price | brand     | rating |
++---------------+----------+-------+-----------+--------+
+| white shirts  | clothing |  1050 | alan      |    4.9 |
+| black tshirts | clothing |   899 | puma      |    3.9 |
+| black jeans   | clothing |  1500 | alan      |    4.3 |
+| white jeans   | clothing |  1233 | alan      |      3 |
+| bourbon small | choco    |    30 | birtannia |    3.6 |
+| bourbon extra | choco    |    50 | birtannia |    3.8 |
+| lays chips    | chips    |    10 | pepsico   |    4.3 |
+| lays chips    | chips    |    10 | pepsico   |    4.3 |
+| bingo chips   | chips    |     5 | potato    |    4.5 |
+| blue shirt    | clothing |  1200 | denim     |    4.5 |
+| note 4        | mob      | 10000 | redmi     |    4.3 |
+| nord se       | mob      | 35000 | one plus  |    4.4 |
+| silk          | choco    |    50 | cadbury   |    4.5 |
+| cake          | cakes    |   300 | cake      |    3.3 |
+| red shirt     | clothing |  2300 | nike      |    3.3 |
+| green shirts  | clothing |  1999 | levis     |    4.4 |
++---------------+----------+-------+-----------+--------+
+16 rows in set (0.00 sec)
+
+mysql> select*from products where brand='puma','nike','levis' where name<>'black shirts';
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ','nike','levis' where name<>'black shirts'' at line 1
+mysql> select*from products where brand='puma','nike','levis' and name<>'black shirts';
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ','nike','levis' and name<>'black shirts'' at line 1
+mysql> select*from products where brand in('puma','nike','levis') and
+name<>'black shirts';
++---------------+----------+-------+-------+--------+
+| name          | category | price | brand | rating |
++---------------+----------+-------+-------+--------+
+| black tshirts | clothing |   899 | puma  |    3.9 |
+| red shirt     | clothing |  2300 | nike  |    3.3 |
+| green shirts  | clothing |  1999 | levis |    4.4 |
++---------------+----------+-------+-------+--------+
+3 rows in set (0.00 sec)
+
+mysql> 
+
+

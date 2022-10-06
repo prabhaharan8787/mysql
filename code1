@@ -1,0 +1,227 @@
+mysql> create table studentprofile(rollno int,name varchar(250),dob int,department varchar(250),city varchar(250));
+Query OK, 0 rows affected (0.03 sec)
+
+mysql> desc studentprofile;
++------------+--------------+------+-----+---------+-------+
+| Field      | Type         | Null | Key | Default | Extra |
++------------+--------------+------+-----+---------+-------+
+| rollno     | int          | YES  |     | NULL    |       |
+| name       | varchar(250) | YES  |     | NULL    |       |
+| dob        | int          | YES  |     | NULL    |       |
+| department | varchar(250) | YES  |     | NULL    |       |
+| city       | varchar(250) | YES  |     | NULL    |       |
++------------+--------------+------+-----+---------+-------+
+5 rows in set (0.00 sec)
+mysql> create table score(rollno int,name varchar(250),mark1 int,mark2 int);
+Query OK, 0 rows affected (0.02 sec)
+
+mysql> desc score;
++--------+--------------+------+-----+---------+-------+
+| Field  | Type         | Null | Key | Default | Extra |
++--------+--------------+------+-----+---------+-------+
+| rollno | int          | YES  |     | NULL    |       |
+| name   | varchar(250) | YES  |     | NULL    |       |
+| mark1  | int          | YES  |     | NULL    |       |
+| mark2  | int          | YES  |     | NULL    |       |
++--------+--------------+------+-----+---------+-------+
+4 rows in set (0.00 sec)
+mysql> select * from studentprofile;
++--------+---------+--------+------------+------------+
+| rollno | name    | dob    | department | city       |
++--------+---------+--------+------------+------------+
+|      1 | raja    | 25 aug | Bsc cs     | Coimbatore |
+|      2 | Abhjith | 24 jul | Bsc cs     | Madurai    |
+|      3 | pk  | 3 jul  | Bsc it     | Tiruppur   |
+|      4 | sekar    | 25 jan | Bsc it     | Salem      |
+|      5 | yogesh  | 30 feb | Bsc cs     | Trichy     |
++--------+---------+--------+------------+------------+
+5 rows in set (0.00 sec)
+
+mysql> select * from score;
++--------+----------+-------+-------+
+| rollno | name     | mark1 | mark2 |
++--------+----------+-------+-------+
+|      1 | raja     |    55 |    65 |
+|      2 | seenu |    89 |    78 |
+|      3 | pk   |    72 |    84 |
+|      4 | sekar     |    56 |    23 |
+|      1 | yogesh   |    10 |    14 |
++--------+----------+-------+-------+
+5 rows in set (0.00 sec)
+mysql> alter table score add total int  after mark2;
+Query OK, 0 rows affected (0.02 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> desc score;
++--------+--------------+------+-----+---------+-------+
+| Field  | Type         | Null | Key | Default | Extra |
++--------+--------------+------+-----+---------+-------+
+| rollno | int          | YES  |     | NULL    |       |
+| name   | varchar(250) | YES  |     | NULL    |       |
+| mark1  | int          | YES  |     | NULL    |       |
+| mark2  | int          | YES  |     | NULL    |       |
+| total  | int          | YES  |     | NULL    |       |
++--------+--------------+------+-----+---------+-------+
+5 rows in set (0.00 sec)
+mysql> alter table studentprofile change dob dateofbirth varchar(250);
+Query OK, 0 rows affected (0.01 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> desc studentprofile;
++-------------+--------------+------+-----+---------+-------+
+| Field       | Type         | Null | Key | Default | Extra |
++-------------+--------------+------+-----+---------+-------+
+| rollno      | int          | YES  |     | NULL    |       |
+| name        | varchar(250) | YES  |     | NULL    |       |
+| dateofbirth | varchar(250) | YES  |     | NULL    |       |
+| department  | varchar(250) | YES  |     | NULL    |       |
+| city        | varchar(250) | YES  |     | NULL    |       |
++-------------+--------------+------+-----+---------+-------+
+5 rows in set (0.00 sec)
+mysql> select * from studentprofile;
++--------+---------+-------------+------------+------------+
+| rollno | name    | dateofbirth | department | city       |
++--------+---------+-------------+------------+------------+
+|      1 | raja    | 25 aug      | Bsc cs     | Coimbatore |
+|      2 | Abhjith | 24 jul      | Bsc cs     | Madurai    |
+|      3 | pk  | 3 jul       | Bsc it     | Tiruppur   |
+|      4 | sekar    | 25 jan      | Bsc it     | Salem      |
+|      5 | yogesh  | 30 feb      | Bsc cs     | Trichy     |
++--------+---------+-------------+------------+------------+
+5 rows in set (0.00 sec)
+
+mysql> select * from score;
++--------+----------+-------+-------+-------+
+| rollno | name     | mark1 | mark2 | total |
++--------+----------+-------+-------+-------+
+|      1 | raja     |    55 |    65 |  NULL |
+|      2 | seenu |    89 |    78 |  NULL |
+|      3 | pk   |    72 |    84 |  NULL |
+|      4 | sekar     |    56 |    23 |  NULL |
+|      1 | yogesh   |    10 |    14 |  NULL |
++--------+----------+-------+-------+-------+
+5 rows in set (0.00 sec)
+mysql> show tables;
++-----------------------+
+| Tables_in_assignment1 |
++-----------------------+
+| score                 |
+| studentprofile        |
++-----------------------+
+2 rows in set (0.00 sec)
+mysql> update score set total=(mark1+mark2) where rollno=1;
+Query OK, 2 rows affected (0.01 sec)
+Rows matched: 2  Changed: 2  Warnings: 0
+
+mysql> select* from score;
++--------+----------+-------+-------+-------+
+| rollno | name     | mark1 | mark2 | total |
++--------+----------+-------+-------+-------+
+|      1 | raja     |    55 |    65 |   120 |
+|      2 | seenu |    89 |    78 |  NULL |
+|      3 | pk   |    72 |    84 |  NULL |
+|      4 | sekar     |    56 |    23 |  NULL |
+|      1 | yogesh   |    10 |    14 |    24 |
+
+
+
+
+
+
+mysql> update score set total=(mark1+mark2) where rollno=4;
+Query OK, 1 row affected (0.00 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select* from score;
++--------+----------+-------+-------+-------+
+| rollno | name     | mark1 | mark2 | total |
++--------+----------+-------+-------+-------+
+|      1 | raja     |    55 |    65 |   120 |
+|      2 | seenu |    89 |    78 |   167 |
+|      3 | pk   |    72 |    84 |   156 |
+|      4 | sekar     |    56 |    23 |    79 |
+|      1 | yogesh   |    10 |    14 |    24 |
++--------+----------+-------+-------+-------+
+5 rows in set (0.00 sec)
+
+mysql>
+mysql> delete from studentprofile where rollno=4;
+Query OK, 1 row affected (0.01 sec)
+
+mysql> select* from studentprofile;
++--------+---------+-------------+------------+------------+
+| rollno | name    | dateofbirth | department | city       |
++--------+---------+-------------+------------+------------+
+|      1 | raja    | 25 aug      | Bsc cs     | Coimbatore |
+|      2 | Abhjith | 24 jul      | Bsc cs     | Madurai    |
+|      3 | pk  | 3 jul       | Bsc it     | Tiruppur   |
+|      5 | yogesh  | 30 feb      | Bsc cs     | Trichy     |
++--------+---------+-------------+------------+------------+
+4 rows in set (0.00 sec)
+
+mysql> select* from studentprofile;
++--------+---------+-------------+------------+------------+
+| rollno | name    | dateofbirth | department | city       |
++--------+---------+-------------+------------+------------+
+|      1 | raja    | 25 aug      | Bsc cs     | Coimbatore |
+|      2 | Abhjith | 24 jul      | Bsc cs     | Madurai    |
+|      3 | pk  | 3 jul       | Bsc it     | Tiruppur   |
+|      5 | yogesh  | 30 feb      | Bsc cs     | Trichy     |
++--------+---------+-------------+------------+------------+
+4 rows in set (0.00 sec)
+
+mysql> select* from score;
++--------+----------+-------+-------+-------+
+| rollno | name     | mark1 | mark2 | total |
++--------+----------+-------+-------+-------+
+|      1 | raja     |    55 |    65 |   120 |
+|      2 | seenu |    89 |    78 |   167 |
+|      3 | pk   |    72 |    84 |   156 |
+|      4 | sekar     |    56 |    23 |    79 |
+|      1 | yogesh   |    10 |    14 |    24 |
++--------+----------+-------+-------+-------+
+5 rows in set (0.00 sec)
+mysql> select rollno,name,mark1,mark2,total,(total)/2 as  average from score;
++--------+----------+-------+-------+-------+---------+
+| rollno | name     | mark1 | mark2 | total | average |
++--------+----------+-------+-------+-------+---------+
+|      1 | raja     |    55 |    65 |   120 | 60.0000 |
+|      2 | seenu |    89 |    78 |   167 | 83.5000 |
+|      3 | pk   |    72 |    84 |   156 | 78.0000 |
+|      4 | sekar     |    56 |    23 |    79 | 39.5000 |
+|      1 | yogesh   |    10 |    14 |    24 | 12.0000 |
++--------+----------+-------+-------+-------+---------+
+5 rows in set (0.00 sec)
+mysql> update score set grade='fail' where mark1<40 or mark2<40;
+Query OK, 2 rows affected (0.00 sec)
+Rows matched: 2  Changed: 2  Warnings: 0
+
+mysql> select * from score;
++--------+----------+-------+-------+-------+-------+
+| rollno | name     | mark1 | mark2 | total | grade |
++--------+----------+-------+-------+-------+-------+
+|      1 | raja     |    55 |    65 |   120 | pass  |
+|      2 | seenu |    89 |    78 |   167 | pass  |
+|      3 | pk   |    72 |    84 |   156 | pass  |
+|      4 | sekar     |    56 |    23 |    79 | fail  |
+|      1 | yogesh   |    10 |    14 |    24 | fail  |
++--------+----------+-------+-------+-------+-------+
+5 rows in set (0.00 sec)
+mysql> alter table score drop column average;
+Query OK, 0 rows affected (0.02 sec)
+Records: 0  Duplicates: 0  Warnings: 0
++--------+----------+-------+-------+-------+-------+
+| rollno | name     | mark1 | mark2 | total | grade |
++--------+----------+-------+-------+-------+-------+
+|      1 | raja     |    55 |    65 |   120 | pass  |
+|      2 | seenu |    89 |    78 |   167 | pass  |
+|      3 | pk   |    72 |    84 |   156 | pass  |
+|      4 | sekar     |    56 |    23 |    79 | fail  |
+|      1 | yogesh   |    10 |    14 |    24 | fail  |
++--------+----------+-------+-------+-------+-------+
+5 rows in set (0.00 sec)
+mysql> truncate table score;
+Query OK, 0 rows affected (0.02 sec)
+
+mysql> select * from score;
+Empty set (0.00 sec)

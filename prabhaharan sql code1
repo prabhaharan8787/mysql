@@ -1,0 +1,68 @@
+Database changed
+mysql> show tables;
++---------------+
+| Tables_in_pk1 |
++---------------+
+| cust          |
+| e_com         |
+| pk1           |
+| player        |
+| student       |
+| tour          |
++---------------+
+6 rows in set (0.00 sec)
+
+mysql> desc cust;
++---------------+--------------+------+-----+---------+-------+
+| Field         | Type         | Null | Key | Default | Extra |
++---------------+--------------+------+-----+---------+-------+
+| cust_id       | int          | YES  |     | NULL    |       |
+| first_name    | varchar(100) | YES  |     | NULL    |       |
+| last_name     | varchar(100) | YES  |     | NULL    |       |
+| date_of_birth | date         | YES  |     | NULL    |       |
+| address       | text         | YES  |     | NULL    |       |
+| phone_num     | int          | YES  |     | NULL    |       |
++---------------+--------------+------+-----+---------+-------+
+6 rows in set (0.00 sec)
+
+mysql> desc e_com;
++-------------------+----------+------+-----+---------+-------+
+| Field             | Type     | Null | Key | Default | Extra |
++-------------------+----------+------+-----+---------+-------+
+| order_id          | int      | YES  |     | NULL    |       |
+| cust_id           | int      | YES  |     | NULL    |       |
+| order_datetime    | datetime | YES  |     | NULL    |       |
+| shipping_datetime | datetime | YES  |     | NULL    |       |
+| total_amout       | int      | YES  |     | NULL    |       |
++-------------------+----------+------+-----+---------+-------+
+5 rows in set (0.00 sec)
+
+mysql> desc player;
++-------+-------------+------+-----+---------+-------+
+| Field | Type        | Null | Key | Default | Extra |
++-------+-------------+------+-----+---------+-------+
+| name  | varchar(10) | YES  |     | NULL    |       |
+| age   | int         | YES  |     | NULL    |       |
+| score | int         | YES  |     | NULL    |       |
++-------+-------------+------+-----+---------+-------+
+3 rows in set (0.00 sec)
+
+mysql> select*from player;
++--------+------+-------+
+| name   | age  | score |
++--------+------+-------+
+| pk     |   25 |    70 |
+| ch     |   27 |    50 |
+| db     |   30 |    80 |
+| prabhu |   45 |    99 |
++--------+------+-------+
+4 rows in set (0.00 sec)
+
+mysql> select*from tour;
++------+------+-------+
+| name | age  | score |
++------+------+-------+
+| ram  |   28 | 30    |
++------+------+-------+
+1 row in set (0.00 sec)
+
